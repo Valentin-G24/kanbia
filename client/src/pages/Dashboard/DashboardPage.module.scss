@@ -1,0 +1,47 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {}
+
+.header {
+  margin-bottom: $space-8;
+}
+
+.greeting {
+  font-size: $font-3xl;
+  font-weight: 700;
+  margin-bottom: $space-2;
+
+  span { color: $primary-400; }
+}
+
+.sub { color: var(--text-muted); }
+
+.section {
+  margin-top: $space-8;
+}
+
+.sectionTitle {
+  font-size: $font-lg;
+  font-weight: 600;
+  margin-bottom: $space-4;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: $space-6;
+}
+
+.chartCard {
+  @include card;
+}
+
+.chartTitle {
+  font-size: $font-sm;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: $space-4;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

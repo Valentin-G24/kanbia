@@ -1,0 +1,145 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  transition: transform $transition-base;
+
+  @media (max-width: $bp-md) {
+    transform: translateX(-100%);
+    &.open { transform: translateX(0); }
+  }
+}
+
+.logo {
+  @include flex(row, center, flex-start, $space-2);
+  padding: $space-6 $space-5;
+  border-bottom: 1px solid var(--border-color);
+  font-size: $font-lg;
+  font-weight: 700;
+  color: $primary-400;
+}
+
+.logoName {
+  font-family:var(--font-mono), monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: $font-4xl;
+  font-weight: 300;
+  color: $primary-400;
+}
+
+.logoName2 {
+  font-family:var(--font-mono), monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: $font-4xl;
+  font-weight: 700;
+  color: $primary-400;
+}
+
+.logoIcon {
+  color: $primary-400;
+  flex-shrink: 0;
+}
+
+.nav {
+  flex: 1;
+  padding: $space-4 $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  overflow-y: auto;
+}
+
+.navItem {
+  @include flex(row, center, flex-start, $space-3);
+  @include focus-ring;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  font-size: $font-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all $transition-fast;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: rgba(59, 130, 246, 0.15);
+    color: $primary-400;
+    border-left: 2px solid $primary-500;
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.section {
+  font-size: $font-xs;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: $space-3 $space-3 $space-1;
+  margin-top: $space-3;
+}
+
+.footer {
+  padding: $space-3 $space-3;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.footerActions {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.footerBtn {
+  @include flex(row, center, flex-start, $space-3);
+  @include focus-ring;
+  width: 100%;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  font-size: $font-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: rgba(59, 130, 246, 0.15);
+    color: $primary-400;
+  }
+
+  &:last-child:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+  }
+}

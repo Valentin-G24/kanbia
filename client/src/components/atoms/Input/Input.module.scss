@@ -1,0 +1,59 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.label {
+  font-size: $font-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.inputWrapper {
+  position: relative;
+  @include flex(row, center);
+}
+
+.input {
+  width: 100%;
+  padding: $space-2 $space-3;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-md;
+  color: var(--text-primary);
+  font-size: $font-sm;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+  @include focus-ring;
+
+  &::placeholder { color: var(--text-muted); }
+
+  &:focus {
+    outline: none;
+    border-color: $primary-500;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  &.error {
+    border-color: $danger-500;
+    &:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1); }
+  }
+
+  &.withIcon { padding-left: 2.5rem; }
+}
+
+.icon {
+  position: absolute;
+  left: $space-3;
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+}
+
+.errorMsg {
+  font-size: $font-xs;
+  color: $danger-400;
+}

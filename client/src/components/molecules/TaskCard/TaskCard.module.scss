@@ -1,0 +1,73 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.card {
+  @include card;
+  padding: $space-4;
+  cursor: grab;
+  transition: all $transition-base;
+  position: relative;
+
+  &:hover { border-color: $primary-500; box-shadow: $shadow-glow; }
+  &:active { cursor: grabbing; }
+}
+
+.title {
+  font-size: $font-sm;
+  font-weight: 500;
+  margin-bottom: $space-3;
+  line-height: 1.4;
+  @include truncate;
+}
+
+.meta {
+  @include flex(row, center, space-between);
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.footer {
+  @include flex(row, center, space-between);
+  margin-top: $space-3;
+  padding-top: $space-3;
+  border-top: 1px solid var(--border-color);
+}
+
+.storyTag {
+  font-size: $font-xs;
+  color: $primary-400;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: $radius-full;
+  padding: 1px 7px;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.due {
+  font-size: $font-xs;
+  color: var(--text-muted);
+}
+
+.overdue { color: $danger-400; }
+
+.actions {
+  @include flex(row, center, flex-end, $space-1);
+  opacity: 0;
+  transition: opacity $transition-fast;
+  .card:hover & { opacity: 1; }
+}
+
+.actionBtn {
+  @include flex(row, center, center);
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-sm;
+  color: var(--text-muted);
+  font-size: $font-xs;
+  transition: all $transition-fast;
+  &:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+  &.danger:hover { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+}

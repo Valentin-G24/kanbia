@@ -1,0 +1,43 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {}
+.title { font-size: $font-2xl; font-weight: 700; margin-bottom: $space-6; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: $space-6;
+  @media (max-width: $bp-md) { grid-template-columns: 1fr; }
+}
+
+.card { @include card; }
+
+.avatarSection { @include flex(row, center, flex-start, $space-4); }
+
+.userName { font-size: $font-xl; font-weight: 600; }
+.userEmail { font-size: $font-sm; color: var(--text-muted); margin-top: 2px; }
+
+.cardTitle { font-size: $font-lg; font-weight: 600; margin-bottom: $space-4; }
+
+.form { display: flex; flex-direction: column; gap: $space-4; }
+
+.success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: $radius-md;
+  padding: $space-3;
+  color: $success-400;
+  font-size: $font-sm;
+  margin-bottom: $space-4;
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: $radius-md;
+  padding: $space-3;
+  color: $danger-400;
+  font-size: $font-sm;
+  margin-bottom: $space-4;
+}

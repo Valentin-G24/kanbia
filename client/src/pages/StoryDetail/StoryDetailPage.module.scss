@@ -1,0 +1,90 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header { margin-bottom: $space-6; }
+
+.breadcrumb {
+  @include flex(row, center, flex-start, $space-2);
+  font-size: $font-sm;
+  color: var(--text-muted);
+  margin-bottom: $space-3;
+  a { color: $primary-400; &:hover { text-decoration: underline; } }
+}
+
+.title { font-size: $font-2xl; font-weight: 700; }
+
+.meta {
+  @include flex(row, center, flex-start, $space-3);
+  flex-wrap: wrap;
+  margin-top: $space-3;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: $space-6;
+  margin-top: $space-6;
+
+  @media (max-width: $bp-lg) { grid-template-columns: 1fr; }
+}
+
+.card { @include card; margin-bottom: $space-4; }
+
+.cardTitle {
+  font-size: $font-sm;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: $space-3;
+}
+
+.cardBody { font-size: $font-sm; line-height: 1.7; color: var(--text-secondary); }
+
+.comments { display: flex; flex-direction: column; gap: $space-4; }
+
+.comment {
+  @include flex(row, flex-start, flex-start, $space-3);
+}
+
+.commentBody { flex: 1; }
+
+.commentMeta {
+  @include flex(row, center, flex-start, $space-2);
+  margin-bottom: $space-1;
+  font-size: $font-sm;
+  font-weight: 500;
+}
+
+.commentTime { font-size: $font-xs; color: var(--text-muted); }
+
+.commentText { font-size: $font-sm; color: var(--text-secondary); line-height: 1.5; }
+
+.commentForm {
+  @include flex(row, flex-start, flex-start, $space-3);
+  margin-top: $space-4;
+}
+
+.commentInput {
+  flex: 1;
+  padding: $space-2 $space-3;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-md;
+  color: var(--text-primary);
+  font-size: $font-sm;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 72px;
+  &:focus { outline: none; border-color: $primary-500; }
+}
+
+.infoRow {
+  @include flex(row, center, space-between);
+  padding: $space-2 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: $font-sm;
+  &:last-child { border-bottom: none; }
+}
+
+.infoLabel { color: var(--text-muted); }

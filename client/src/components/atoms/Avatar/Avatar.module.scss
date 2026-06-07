@@ -1,0 +1,20 @@
+@use '../../../styles/variables' as *;
+
+.avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, $primary-600, $primary-400);
+  color: $white;
+}
+
+.sm { width: 28px; height: 28px; font-size: $font-xs; }
+.md { width: 36px; height: 36px; font-size: $font-sm; }
+.lg { width: 48px; height: 48px; font-size: $font-base; }
+.xl { width: 64px; height: 64px; font-size: $font-xl; }
+
+.img { width: 100%; height: 100%; object-fit: cover; }

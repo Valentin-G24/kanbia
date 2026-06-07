@@ -1,0 +1,102 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  @include flex(row, center, space-between);
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+  gap: $space-4;
+}
+
+.title { font-size: $font-2xl; font-weight: 700; }
+
+.controls {
+  @include flex(row, center, flex-end, $space-3);
+  flex-wrap: wrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $space-5;
+}
+
+.card {
+  @include card;
+  @include hover-lift;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+}
+
+.cardActions {
+  @include flex(row, center, flex-end, $space-1);
+  opacity: 0;
+  transition: opacity $transition-fast;
+  .card:hover & { opacity: 1; }
+}
+
+.cardActionBtn {
+  @include flex(row, center, center);
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-sm;
+  font-size: $font-sm;
+  transition: all $transition-fast;
+  color: var(--text-muted);
+
+  &:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+  &.danger:hover { background: rgba(239,68,68,0.12); color: $danger-400; }
+}
+
+.cardHeader {
+  @include flex(row, flex-start, space-between);
+  margin-bottom: $space-4;
+  gap: $space-3;
+}
+
+.cardTitle {
+  font-size: $font-base;
+  font-weight: 600;
+  flex: 1;
+  @include truncate;
+}
+
+.cardDesc {
+  font-size: $font-sm;
+  color: var(--text-muted);
+  margin-bottom: $space-4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardFooter {
+  @include flex(row, center, space-between);
+  padding-top: $space-3;
+  border-top: 1px solid var(--border-color);
+  font-size: $font-xs;
+  color: var(--text-muted);
+}
+
+.members {
+  @include flex(row, center);
+  & > * { margin-left: -8px; &:first-child { margin-left: 0; } }
+}
+
+.formGrid {
+  display: grid;
+  gap: $space-4;
+}
+
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: $space-4; }
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: $space-16;
+  color: var(--text-muted);
+}

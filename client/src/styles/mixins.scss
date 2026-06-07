@@ -1,0 +1,50 @@
+@use 'variables' as *;
+
+@mixin flex($direction: row, $align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  @if $gap != 0 { gap: $gap; }
+}
+
+@mixin card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-lg;
+  padding: $space-6;
+}
+
+@mixin glass {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@mixin hover-lift {
+  transition: transform $transition-base, box-shadow $transition-base;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm { @media (min-width: $bp-sm) { @content; } }
+  @else if $breakpoint == md { @media (min-width: $bp-md) { @content; } }
+  @else if $breakpoint == lg { @media (min-width: $bp-lg) { @content; } }
+  @else if $breakpoint == xl { @media (min-width: $bp-xl) { @content; } }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $primary-500;
+    outline-offset: 2px;
+  }
+}

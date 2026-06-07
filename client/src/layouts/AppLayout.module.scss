@@ -1,0 +1,41 @@
+@use '../styles/variables' as *;
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  @media (max-width: $bp-md) {
+    margin-left: 0;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: $space-8;
+  max-width: 1400px;
+  width: 100%;
+
+  @media (max-width: $bp-md) {
+    padding: $space-4;
+  }
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+
+  @media (max-width: $bp-md) {
+    &.visible { display: block; }
+  }
+}

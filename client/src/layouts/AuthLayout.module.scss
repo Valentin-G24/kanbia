@@ -1,0 +1,54 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.wrapper {
+  min-height: 100vh;
+  @include flex(row, center, center);
+  background: var(--bg-primary);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
+  padding: $space-4;
+}
+
+.box {
+  width: 100%;
+  max-width: 440px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: $space-8;
+}
+
+.logoMark {
+  display: block;
+  margin-bottom: $space-2;
+  color: $primary-400;
+}
+
+.logoName {
+  font-family:var(--font-mono), monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: $font-4xl;
+  font-weight: 300;
+  color: $primary-400;
+}
+
+.logoName2 {
+  font-family:var(--font-mono), monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: $font-4xl;
+  font-weight: 700;
+  color: $primary-400;
+}
+.marca {
+  font: size 0.1px;
+}
+
+.card {
+  @include card;
+  padding: $space-8;
+}

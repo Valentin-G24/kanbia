@@ -1,0 +1,93 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.breadcrumb {
+  @include flex(row, center, flex-start, $space-2);
+  font-size: $font-sm;
+  color: var(--text-muted);
+  margin-bottom: $space-3;
+  a { color: $primary-400; &:hover { text-decoration: underline; } }
+}
+
+.titleRow {
+  @include flex(row, center, space-between);
+  flex-wrap: wrap;
+  gap: $space-4;
+}
+
+.title { font-size: $font-2xl; font-weight: 700; }
+
+.actions {
+  @include flex(row, center, flex-end, $space-3);
+  flex-wrap: wrap;
+}
+
+.tabs {
+  @include flex(row, center, flex-start);
+  gap: $space-1;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: $space-6;
+}
+
+.tab {
+  padding: $space-3 $space-4;
+  font-size: $font-sm;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all $transition-fast;
+  &:hover { color: var(--text-primary); }
+  &.active { color: $primary-400; border-bottom-color: $primary-500; }
+}
+
+.section { margin-bottom: $space-8; }
+
+.sectionHeader {
+  @include flex(row, center, space-between);
+  margin-bottom: $space-4;
+}
+
+.sectionTitle { font-size: $font-lg; font-weight: 600; }
+
+.epicList { display: flex; flex-direction: column; gap: $space-3; }
+
+.epicCard {
+  @include card;
+  padding: $space-4;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  &:hover { border-color: $primary-500; }
+}
+
+.epicRow {
+  @include flex(row, center, space-between, $space-3);
+}
+
+.epicTitle { font-weight: 500; flex: 1; }
+
+.membersList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.memberRow {
+  @include card;
+  padding: $space-3 $space-4;
+  @include flex(row, center, space-between);
+}
+
+.memberInfo { @include flex(row, center, flex-start, $space-3); flex: 1; }
+
+.memberName { font-size: $font-sm; font-weight: 500; }
+.memberEmail { font-size: $font-xs; color: var(--text-muted); }
+
+.formGrid { display: grid; gap: $space-4; }

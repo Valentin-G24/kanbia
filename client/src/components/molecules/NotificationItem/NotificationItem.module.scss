@@ -1,0 +1,30 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.item {
+  @include flex(row, flex-start, flex-start, $space-3);
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid var(--border-color);
+  transition: background $transition-fast;
+  cursor: pointer;
+
+  &:hover { background: var(--bg-tertiary); }
+  &.unread { background: rgba(59, 130, 246, 0.05); }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $primary-500;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.dotRead { background: transparent; border: 1px solid var(--border-color); }
+
+.content { flex: 1; }
+
+.message { font-size: $font-sm; line-height: 1.4; }
+
+.time { font-size: $font-xs; color: var(--text-muted); margin-top: $space-1; }

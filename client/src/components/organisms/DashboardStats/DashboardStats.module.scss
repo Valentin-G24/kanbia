@@ -1,0 +1,40 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: $space-4;
+}
+
+.card {
+  @include card;
+  @include hover-lift;
+  @include flex(row, center, flex-start, $space-4);
+}
+
+.iconWrap {
+  @include flex(row, center, center);
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-lg;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.info {}
+
+.value {
+  font-size: $font-2xl;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.label {
+  font-size: $font-xs;
+  color: var(--text-muted);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}

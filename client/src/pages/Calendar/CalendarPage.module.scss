@@ -1,0 +1,161 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.header {
+  @include flex(row, center, space-between, $space-4);
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.headerLeft {
+  @include flex(row, center, flex-start, $space-3);
+}
+
+.title {
+  font-size: $font-2xl;
+  font-weight: 700;
+}
+
+.todayBtn {
+  padding: $space-1 $space-4;
+  border-radius: $radius-md;
+  font-size: $font-sm;
+  font-weight: 500;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all $transition-fast;
+  &:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: $primary-500;
+  }
+}
+
+.nav {
+  @include flex(row, center, center, $space-3);
+}
+
+.navBtn {
+  @include flex(row, center, center);
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  color: var(--text-secondary);
+  transition: all $transition-fast;
+  &:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+}
+
+.monthLabel {
+  font-size: $font-lg;
+  font-weight: 600;
+  min-width: 200px;
+  text-align: center;
+}
+
+/* ── Calendar grid ── */
+.dayLabels {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.dayLabel {
+  text-align: center;
+  padding: $space-2;
+  font-size: $font-xs;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  flex: 1;
+}
+
+.cell {
+  min-height: 110px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-md;
+  padding: $space-2;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  transition: background $transition-fast;
+
+  &.cellActive {
+    cursor: pointer;
+    &:hover {
+      background: var(--bg-tertiary);
+      border-color: $primary-500;
+    }
+  }
+}
+
+.cellToday {
+  border-color: $primary-500 !important;
+  background: rgba(59, 130, 246, 0.06) !important;
+
+  .dayNum {
+    background: $primary-500;
+    color: $white;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.dayNum {
+  font-size: $font-sm;
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.eventChip {
+  padding: 2px $space-2;
+  border-radius: $radius-sm;
+  font-size: $font-xs;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+  overflow: hidden;
+  &:hover { opacity: 0.8; }
+}
+
+.eventChipText {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

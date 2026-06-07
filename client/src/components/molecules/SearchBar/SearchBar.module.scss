@@ -1,0 +1,29 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.wrapper {
+  position: relative;
+  @include flex(row, center);
+}
+
+.icon {
+  position: absolute;
+  left: $space-3;
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: $font-sm;
+}
+
+.input {
+  width: 100%;
+  padding: $space-2 $space-3 $space-2 2.25rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-full;
+  color: var(--text-primary);
+  font-size: $font-sm;
+  transition: border-color $transition-fast;
+
+  &::placeholder { color: var(--text-muted); }
+  &:focus { outline: none; border-color: $primary-500; }
+}

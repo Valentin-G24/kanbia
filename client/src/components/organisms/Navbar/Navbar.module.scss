@@ -1,0 +1,188 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.navbar {
+  @include flex(row, center, space-between);
+  height: 68px;
+  padding: 0 $space-6;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  gap: $space-4;
+}
+
+.left {
+  @include flex(row, center, flex-start, $space-3);
+}
+
+.hamburger {
+  @include flex(row, center, center);
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  color: var(--text-secondary);
+  transition: all $transition-fast;
+  display: none;
+  @media (max-width: $bp-md) { display: flex; }
+  &:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+}
+
+.right {
+  @include flex(row, center, flex-end, $space-3);
+  margin-left: auto;
+}
+
+.iconBtn {
+  @include flex(row, center, center);
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  color: var(--text-secondary);
+  transition: all $transition-fast;
+  &:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+}
+
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: $radius-full;
+  background: $danger-500;
+  color: $white;
+  font-size: 10px;
+  font-weight: 700;
+  @include flex(row, center, center);
+  padding: 0 3px;
+}
+
+/* ── Theme Switch ── */
+.themeSwitch {
+  @include flex(row, center, center, 6px);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-1;
+  border-radius: $radius-md;
+  color: var(--text-muted);
+  transition: color $transition-fast;
+  &:hover { color: var(--text-primary); }
+}
+
+.switchIconLeft,
+.switchIconRight {
+  flex-shrink: 0;
+  transition: color $transition-fast;
+}
+
+.switchTrack {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: #334155;
+  border: 1px solid var(--border-color);
+  transition: background $transition-base;
+  flex-shrink: 0;
+
+  &.switchOn {
+    background: $primary-500;
+  }
+}
+
+.switchThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: $white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: transform $transition-base;
+
+  .switchOn & {
+    transform: translateX(18px);
+  }
+}
+
+/* ── User chip ── */
+.userChip {
+  @include flex(row, center, flex-start, $space-2);
+  padding: $space-1 $space-3;
+  border-radius: $radius-md;
+  text-decoration: none;
+  transition: background $transition-fast;
+  &:hover { background: var(--bg-tertiary); }
+}
+
+.userText {
+  @include flex(column, flex-start, flex-start);
+  @media (max-width: $bp-sm) { display: none; }
+}
+
+.userName {
+  font-size: $font-sm;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userEmail {
+  font-size: $font-xs;
+  color: var(--text-muted);
+  white-space: nowrap;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Notifications ── */
+.notifPanel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+  animation: slideDown $transition-base;
+  z-index: 200;
+}
+
+.notifHeader {
+  @include flex(row, center, space-between);
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid var(--border-color);
+  font-size: $font-sm;
+  font-weight: 600;
+}
+
+.markAll {
+  font-size: $font-xs;
+  color: $primary-400;
+  &:hover { text-decoration: underline; }
+}
+
+.notifEmpty {
+  padding: $space-8;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: $font-sm;
+}
+
+.notifScroll { max-height: 360px; overflow-y: auto; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
