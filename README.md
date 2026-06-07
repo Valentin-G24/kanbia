@@ -1,4 +1,4 @@
-# AgileFlow — Plataforma de Gestión Ágil de Proyectos
+# KanBia — Plataforma de Gestión Ágil de Proyectos
 
 ## Stack
 
