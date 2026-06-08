@@ -32,9 +32,10 @@ El sistema es una aplicación monorepo compuesta por dos partes:
    - 4.8 [Estilos y tema](#48-estilos-y-tema)
 5. [Instalación y puesta en marcha](#5-instalación-y-puesta-en-marcha)
 6. [Variables de entorno](#6-variables-de-entorno)
-7. [Roles y permisos](#7-roles-y-permisos)
-8. [Funcionalidades implementadas](#8-funcionalidades-implementadas)
-9. [Glosario y decisiones de diseño](#9-glosario-y-decisiones-de-diseño)
+7. [Despliegue en producción](#7-despliegue-en-producción)
+8. [Roles y permisos](#8-roles-y-permisos)
+9. [Funcionalidades implementadas](#9-funcionalidades-implementadas)
+10. [Glosario y decisiones de diseño](#10-glosario-y-decisiones-de-diseño)
 
 ---
 
@@ -863,7 +864,107 @@ La app corre por defecto en **http://localhost:5173**.
 
 ---
 
-## 7. Roles y permisos
+## 7. Despliegue en producción
+
+La app está desplegada en los siguientes servicios gratuitos:
+
+| Componente | Servicio | URL |
+|-----------|----------|-----|
+| Frontend | Vercel | https://kanbia.vercel.app |
+| Backend | Render | https://kanbia.onrender.com |
+| Base de datos | MongoDB Atlas | Cloud (M0 Free) |
+| Código fuente | GitHub | https://github.com/Valentin-G24/kanbia |
+
+### Arquitectura en producción
+
+```
+Usuario
+   │
+   ▼
+https://kanbia.vercel.app        (Vercel — SPA estática)
+   │
+   │  HTTPS + CORS
+   ▼
+https://kanbia.onrender.com/api  (Render — Node.js)
+   │
+   ▼
+MongoDB Atlas                    (Base de datos en la nube)
+```
+
+### Paso a paso para deployar desde cero
+
+#### 1. MongoDB Atlas
+
+1. Crear cuenta en [cloud.mongodb.com](https://cloud.mongodb.com)
+2. Crear cluster gratuito (M0)
+3. En **Database Access**: crear usuario con contraseña (solo letras y números)
+4. En **Network Access**: agregar `0.0.0.0/0`
+5. Copiar la URI de conexión:
+   ```
+   mongodb+srv://USUARIO:CONTRASEÑA@cluster0.xxxxx.mongodb.net/kanbia
+   ```
+
+#### 2. Render (backend)
+
+1. Crear cuenta en [render.com](https://render.com) y conectar GitHub
+2. **New Web Service** → repositorio `kanbia`
+3. Configuración:
+   - **Root Directory**: `server`
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+4. Variables de entorno:
+
+   | Variable | Valor |
+   |----------|-------|
+   | `MONGODB_URI` | URI de Atlas |
+   | `JWT_SECRET` | string secreto largo |
+   | `JWT_EXPIRES_IN` | `7d` |
+   | `NODE_ENV` | `production` |
+   | `CLIENT_URL` | `https://kanbia.vercel.app` ← con `https://` |
+
+5. Deploy → copiar la URL asignada (ej: `https://kanbia.onrender.com`)
+
+#### 3. Vercel (frontend)
+
+1. Crear cuenta en [vercel.com](https://vercel.com) y conectar GitHub
+2. **New Project** → repositorio `kanbia`
+3. Configuración:
+   - **Root Directory**: `client`
+   - **Framework**: Vite (auto-detectado)
+4. Deploy
+
+> La URL del backend ya está configurada en `client/.env.production` — no es necesario configurar variables de entorno en la UI de Vercel.
+
+#### 4. Poblar la base de datos
+
+Tras el primer deploy, registrarse desde la app (rol `developer` por defecto) y luego cambiar el rol a `admin` directamente en MongoDB Atlas:
+
+1. Atlas → **Browse Collections** → `users`
+2. Editar el documento → campo `role` → `admin`
+
+Alternativamente, usar las credenciales del seed si se corrió previamente:
+```
+admin@agileflow.dev / admin123
+```
+
+### Consideraciones del plan gratuito
+
+- **Render**: el backend se "duerme" tras 15 minutos de inactividad. La primera request puede tardar 30-60 segundos mientras despierta.
+- **MongoDB Atlas**: límite de 512 MB de almacenamiento en M0 Free.
+- **Vercel**: sin límites prácticos para proyectos personales.
+
+### Archivos clave para el deploy
+
+| Archivo | Propósito |
+|---------|-----------|
+| `client/.npmrc` | `legacy-peer-deps=true` — resuelve conflicto de `@hello-pangea/dnd` con React 19 en el build de Vercel |
+| `client/.env.production` | `VITE_API_URL` apuntando a Render — se commitea porque no es un secreto |
+| `server/.env` | Variables sensibles del backend — **no se versiona** |
+| `.gitignore` | Excluye `node_modules/`, `server/.env`, `client/dist/` |
+
+---
+
+## 8. Roles y permisos
 
 El sistema implementa RBAC (Role-Based Access Control) con 4 roles globales:
 
@@ -899,7 +1000,7 @@ El sistema implementa RBAC (Role-Based Access Control) con 4 roles globales:
 
 ---
 
-## 8. Funcionalidades implementadas
+## 9. Funcionalidades implementadas
 
 ### Gestión de proyectos
 - CRUD completo de proyectos (solo admin).
@@ -952,7 +1053,7 @@ El sistema implementa RBAC (Role-Based Access Control) con 4 roles globales:
 
 ---
 
-## 9. Glosario y decisiones de diseño
+## 10. Glosario y decisiones de diseño
 
 ### Glosario
 
