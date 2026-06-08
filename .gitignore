@@ -13,6 +13,7 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+# .env.production se commitea intencionalmente (solo contiene la URL pública del backend)
 
 # ===========================
 # Build del frontend (Vite)
