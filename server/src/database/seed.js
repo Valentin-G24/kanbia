@@ -8,7 +8,9 @@ const Story = require('../models/Story');
 const Task = require('../models/Task');
 
 const seed = async () => {
-  await connectDB();
+  if (mongoose.connection.readyState === 0) {
+    await connectDB();
+  }
 
   await Promise.all([
     User.deleteMany({}),
@@ -108,10 +110,16 @@ const seed = async () => {
   console.log('  admin@agileflow.dev    / admin123');
   console.log('  sm@agileflow.dev       / scrum123');
   console.log('  dev@agileflow.dev      / dev12345');
-  process.exit(0);
 };
 
-seed().catch((err) => {
-  console.error('[Seed Error]', err);
-  process.exit(1);
-});
+// Permite correr directamente con "npm run seed"
+if (require.main === module) {
+  seed()
+    .then(() => process.exit(0))
+    .catch((err) => {
+      console.error('[Seed Error]', err);
+      process.exit(1);
+    });
+}
+
+module.exports = seed;

@@ -33,6 +33,19 @@ app.use(loggerMiddleware);
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', env: process.env.NODE_ENV }));
 
+app.get('/api/seed', async (_req, res) => {
+  if (process.env.NODE_ENV !== 'production') {
+    return res.status(403).json({ message: 'Solo disponible en producción' });
+  }
+  try {
+    const seed = require('./database/seed');
+    await seed();
+    res.json({ success: true, message: 'Base de datos poblada correctamente' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
